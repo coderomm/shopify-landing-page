@@ -71,7 +71,7 @@ export default function AgencyFreelanceHero() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen cursor-none"
+      className="relative min-h-screen dark:cursor-none"
     >
       <div className="absolute inset-0 z-0
       bg-[radial-gradient(circle_at_bottom_center,rgba(2,88,96,0.5),transparent_60%)]

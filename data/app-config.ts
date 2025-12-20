@@ -63,8 +63,7 @@ export const appConfig = {
 
     author: "Om Sharma",
 
-    // Use /og-image.png or dynamic later
-    ogImage: `${process.env.NEXT_PUBLIC_APP_URL}/og.png`,
+    ogImage: `${process.env.NEXT_PUBLIC_APP_URL}/hero-light.png`,
 
     twitterHandle: "@1omsharma",
   },
