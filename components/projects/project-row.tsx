@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { ShopifyProject } from '@/data/resume';
+import { trackProjectExpand, trackProjectWebsiteClick } from '@/lib/analytics';
 
 interface ProjectRowProps {
   project: ShopifyProject;
@@ -61,6 +62,13 @@ const ProjectRow: React.FC<ProjectRowProps> = ({ project, isExpanded, onToggle }
     }
   };
 
+  const handleToggle = () => {
+    if (!isExpanded) {
+      trackProjectExpand(project.title);
+    }
+    onToggle();
+  };
+
   return (
     <div className="border-b border-mid-green">
       {/* Header Row */}
@@ -69,7 +77,7 @@ const ProjectRow: React.FC<ProjectRowProps> = ({ project, isExpanded, onToggle }
         className="project-row"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={onToggle}
+        onClick={handleToggle}
       >
         {/* Animated background - always mounted, position changes */}
         <motion.div
@@ -147,6 +155,9 @@ const ProjectRow: React.FC<ProjectRowProps> = ({ project, isExpanded, onToggle }
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.4 }}
                   className="inline-flex items-center justify-center w-auto rounded-full text-foreground bg-background dark:text-background dark:bg-foreground h-8 md:h-10 px-4 mb-8 font-grotesque"
+                  onClick={() =>
+                    trackProjectWebsiteClick(project.title, project.link)
+                  }
                 >
                   See website
                 </motion.a>

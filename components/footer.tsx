@@ -2,6 +2,7 @@ import { appConfig } from "@/data/app-config";
 import { GitHub, Gmail, LinkedIn, Upwork, XformerlyTwitter } from "./icons";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
+import { trackFooterLinkClick } from "@/lib/analytics";
 
 export default function FooterSection() {
   const currentYear = new Date().getFullYear()
@@ -14,11 +15,11 @@ export default function FooterSection() {
               <MapPin className="size-4" /> <p className="">{appConfig.contact.location}</p>
             </div>
             <div className="flex items-center gap-4">
-              <Link target="_blank" href={appConfig.social.upwork}><Upwork className="text-background dark:text-foreground" /></Link>
-              <Link target="_blank" href={appConfig.social.linkedin}><LinkedIn className="text-background dark:text-foreground" /></Link>
-              <Link target="_blank" href={appConfig.social.twitter}><XformerlyTwitter /></Link>
-              <Link target="_blank" href={appConfig.social.github} ><GitHub /></Link>
-              <Link target="_blank" href={`mailto:${appConfig.contact.email}`}><Gmail /></Link>
+              <Link target="_blank" href={appConfig.social.upwork} onClick={() => trackFooterLinkClick("upwork")}><Upwork className="text-background dark:text-foreground" /></Link>
+              <Link target="_blank" href={appConfig.social.linkedin} onClick={() => trackFooterLinkClick("linkedin")}><LinkedIn className="text-background dark:text-foreground" /></Link>
+              <Link target="_blank" href={appConfig.social.twitter} onClick={() => trackFooterLinkClick("twitter")}><XformerlyTwitter /></Link>
+              <Link target="_blank" href={appConfig.social.github} onClick={() => trackFooterLinkClick("github")}><GitHub /></Link>
+              <Link target="_blank" href={`mailto:${appConfig.contact.email}`} onClick={() => trackFooterLinkClick("gmail")}><Gmail /></Link>
             </div>
             <p className="text-sm text-background dark:text-foreground">
               © {currentYear} {appConfig.appName}. All rights reserved.

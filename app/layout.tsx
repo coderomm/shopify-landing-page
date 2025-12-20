@@ -3,6 +3,8 @@ import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { appMetadata, jsonLdSchema } from "@/data/metadata";
 import { ThemeProvider } from "@/components/theme-provider";
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from "@vercel/analytics/next";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -23,14 +25,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = appMetadata
 
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProduction = process.env.NODE_ENV === 'production';
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {isProduction && GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -48,6 +54,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          {isProduction && <Analytics />}
         </ThemeProvider>
       </body>
     </html>
