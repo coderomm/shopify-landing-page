@@ -63,7 +63,7 @@ export const appConfig = {
 
     author: "Om Sharma",
 
-    ogImage: `${process.env.NEXT_PUBLIC_APP_URL}/hero-light.png`,
+    ogImage: `${process.env.NEXT_PUBLIC_APP_URL}/product/hero-light.png`,
 
     twitterHandle: "@1omsharma",
   },
